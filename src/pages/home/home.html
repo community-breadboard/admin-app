@@ -1,0 +1,43 @@
+<ion-header>
+
+	<ion-navbar>
+		<ion-title>
+			<span>Orders</span>
+		</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+  
+  <div *ngIf="!hasOrdersForDelivery && !hasOrdersForPacking" class="warning">
+    <div class="title">There are no orders to fulfill</div>  
+    <div class="message">The next set of orders will be finalized on {{state.producer.producerEntity.nextUpcomingOrderPickupSchedule.nextSaleEndDate | date : 'EEEE'}} at 
+    {{state.producer.producerEntity.nextUpcomingOrderPickupSchedule.nextSaleEndDate | date : 'h:mm a'}} 
+    (
+    {{state.producer.producerEntity.nextUpcomingOrderPickupSchedule.nextSaleEndDate | date : 'MMMM d, yyyy'}} 
+    ) 
+    </div>
+  </div>
+  
+  <div *ngIf="hasOrdersForDelivery || hasOrdersForPacking">
+    <ion-list *ngIf="hasOrdersForDelivery">
+      <ion-list-header>
+        For Delivery
+      </ion-list-header>
+      <button ion-item *ngFor="let pickup of state.producer.producerEntity.orderPickupSchedulesForDelivery" (click)="pickupSelected(pickup)">
+        {{pickup.nextPickupDate | date : 'EEE'}} {{pickup.formattedPickupTime}} ({{ pickup.address.name }})
+      </button>  
+    </ion-list>
+    <ion-list *ngIf="hasOrdersForPacking">
+      <ion-list-header>
+        For Packing
+      </ion-list-header>
+      <button ion-item *ngFor="let pickup of state.producer.producerEntity.orderPickupSchedulesForPacking" (click)="pickupSelected(pickup)">
+        {{pickup.nextPickupDate | date : 'EEE'}} {{pickup.formattedPickupTime}} ({{pickup.seller.name}})
+      </button>  
+    
+    
+    </ion-list>
+  </div>
+    
+</ion-content>

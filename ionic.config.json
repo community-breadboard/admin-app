@@ -1,4 +1,6 @@
 {
-  "name": "adminApp",
-  "app_id": ""
+  "name": "Community Breadboard Admin",
+  "app_id": "6cb45812",
+  "v2": true,
+  "typescript": true
 }
