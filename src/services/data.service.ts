@@ -5,12 +5,10 @@ import { Observable } from 'rxjs/Observable';
 import { Response }  from '@angular/http';
 import { Storage } from "@ionic/storage";
 import { AuthHttp } from 'angular2-jwt';
-import { Producer } from '../models/producer';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/observable/throw';
-import _ from "lodash";
 
 
 @Injectable()

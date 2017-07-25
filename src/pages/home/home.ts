@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, Platform } from 'ionic-angular';
 import { State } from '../../models/state';
+import { OrdersPage } from '../orders/orders';
 import { DataService } from '../../services/data.service';
 import { AuthService } from '../../services/auth.service';
 import { UiService } from '../../services/ui.service';
@@ -24,13 +25,13 @@ export class HomePage implements OnInit {
   
   ngOnInit(): void {
     this.state = this.dataService.state;
-    console.log("state=", this.state);
+//    console.log("state=", this.state);
     this.hasOrdersForDelivery = (this.state.producer.producerEntity.orderPickupSchedulesForDelivery.length > 0);
     this.hasOrdersForPacking = (this.state.producer.producerEntity.orderPickupSchedulesForPacking.length > 0);
   }
 
   pickupSelected(pickup): void {
-    console.log("pickup=", pickup);
+    this.navCtrl.push(OrdersPage, {orderPickupSchedule: pickup, hasOrdersForDelivery: this.hasOrdersForDelivery, hasOrdersForPacking: this.hasOrdersForPacking, currentProducerEntityId: this.state.producer.producerEntity.id});
   }
 	constructor(
 		public navCtrl: NavController,

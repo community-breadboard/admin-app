@@ -8,6 +8,7 @@ import { MyApp } from './app.component';
 import { ServiceDaysPage } from '../pages/serviceDays/serviceDays';
 import { AccountPage } from '../pages/account/account';
 import { HomePage } from '../pages/home/home';
+import { OrdersPage } from '../pages/orders/orders';
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
 import { IonicStorageModule } from '@ionic/storage';
@@ -39,7 +40,8 @@ export function getAuthHttp(http) {
 		AccountPage,
 		HomePage,
 		TabsPage,
-		LoginPage
+		LoginPage,
+    OrdersPage
 	],
 	imports: [
 		BrowserModule,
@@ -54,7 +56,8 @@ export function getAuthHttp(http) {
 		AccountPage,
 		HomePage,
 		TabsPage,
-		LoginPage
+		LoginPage,
+    OrdersPage
 	],
 	providers: [
 		StatusBar,

@@ -12,7 +12,8 @@ export class FoodItem {
 	ingredients?: string;
 	image?: string;
 	producerEntity?: ProducerEntity;
-
+  wholeseller?: ProducerEntity;
+  
 	constructor(json) {
 		this.id = json.id;
 		this.sellableFoodItemId = json.sellable_food_item_id;
@@ -25,6 +26,9 @@ export class FoodItem {
 		this.ingredients = json.ingredients;
 		if (json.image) {
       this.image = json.image;
+    }
+    if (json.wholeseller) {
+		    this.wholeseller = new ProducerEntity(json.wholeseller);
     }
     if (json.producer_entity) {
 		    this.producerEntity = new ProducerEntity(json.producer_entity);

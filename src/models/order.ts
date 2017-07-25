@@ -1,5 +1,6 @@
 import { OrderPickupSchedule } from './order-pickup-schedule';
 import { FoodItem } from './food-item';
+import { Consumer } from './consumer';
 
 export class Order {
   id?: string;
@@ -16,7 +17,7 @@ export class Order {
   nextPickupDate?: Date;
   formattedPickupTime?: string;
   pickupLocationName?: string;
-
+  consumer?: Consumer;
   
   constructor(json) {
     this.id = json.id;
@@ -31,10 +32,14 @@ export class Order {
     this.nextPickupDate = json.next_pickup_date? new Date(json.next_pickup_date) : null;
     this.formattedPickupTime = json.formatted_pickup_time;
     this.pickupLocationName = json.pickup_location_name;
-    this.foodItems = [];
-    for (let foodItem of json.food_items) {
-      this.foodItems.push(new FoodItem(foodItem));
-    };
-    
+    if (json.food_items) {
+      this.foodItems = [];
+      for (let foodItem of json.food_items) {
+        this.foodItems.push(new FoodItem(foodItem));
+      };
+    }
+    if (json.consumer) {
+      this.consumer = new Consumer(json.consumer);
+    }
   }
 }

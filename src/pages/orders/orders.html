@@ -1,0 +1,51 @@
+<ion-header>
+	<ion-navbar>
+		<ion-title>
+		 	Orders
+		</ion-title>
+	</ion-navbar>
+
+  <ion-toolbar no-border-top>
+    <ion-segment [(ngModel)]="by">
+      <ion-segment-button value="producer">
+        Producer
+      </ion-segment-button>
+      <ion-segment-button value="consumer">
+        Consumer
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <div [ngSwitch]="by">
+    
+    <ion-item-group *ngSwitchCase="'producer'">
+      <div *ngFor="let wholeseller of wholesellers">
+        <ion-item-divider color="light">{{wholeseller.name}}</ion-item-divider>
+        <ion-item *ngFor="let foodItem of wholeseller.foodItems">
+          <span style="margin-left:5px;">{{foodItem.quantityOrdered}} </span>
+          <span *ngIf="foodItem.quantityOrdered === 1">{{foodItem.unitLabelSingular}}</span>
+          <span *ngIf="foodItem.quantityOrdered != 1">{{foodItem.unitLabelPlural}}</span>       
+          <span style="margin-left:8px;">{{foodItem.name}}</span>
+          <span *ngIf="foodItem.producerEntity.id != wholeseller.id"> ({{ foodItem.producerEntity.name }})</span>
+        </ion-item>
+      </div>
+    </ion-item-group>
+    
+    
+    <ion-item-group *ngSwitchCase="'consumer'">
+      <div *ngFor="let order of orderPickupSchedule.orders">
+        <ion-item-divider color="light">{{order.consumer.firstName}} {{order.consumer.lastName}}</ion-item-divider>
+        <ion-item *ngFor="let foodItem of order.foodItems">
+          <span style="margin-left:5px;">{{foodItem.quantityOrdered}} </span>
+          <span *ngIf="foodItem.quantityOrdered === 1">{{foodItem.unitLabelSingular}}</span>
+          <span *ngIf="foodItem.quantityOrdered != 1">{{foodItem.unitLabelPlural}}</span>       
+          <span style="margin-left:8px;">{{foodItem.name}}</span>
+        </ion-item>
+      </div>
+    </ion-item-group>
+
+  </div>
+</ion-content>

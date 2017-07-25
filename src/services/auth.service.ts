@@ -36,14 +36,15 @@ export class AuthService {
 			let headers = new Headers({ 'Content-Type': 'application/json' });
 			let options = new RequestOptions({ headers: headers });
 
-			return this.http.post(this.dataService.authUrl, {auth: credentials}, options)
-				.map((res: Response) => res.json())
-				.mergeMap((jwtObject) => {
-					this.storage.set('token', jwtObject.jwt);
-
-					return this.getUser();
-				})
-				.catch(this.dataService.handleError)
+      return this.http.post(this.dataService.authUrl, {auth: credentials}, options)
+        .map((res: Response) => {
+          return this.storage.set('token', res.json().jwt).then(function() { return; });
+        })
+        .mergeMap((promise) => Observable.fromPromise(promise))
+        .mergeMap(() => {
+          return this.getUser();
+        })
+  			.catch(this.dataService.handleError)
 
 		}
 	}

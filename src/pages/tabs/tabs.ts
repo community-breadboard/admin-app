@@ -5,11 +5,6 @@ import { AccountPage } from '../account/account';
 import { ServiceDaysPage } from '../serviceDays/serviceDays';
 import { DataService } from '../../services/data.service';
 import { AuthService } from '../../services/auth.service';
-import { Events, ModalController } from 'ionic-angular';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/mergeMap';
-import 'rxjs/add/observable/throw';
 
 
 @Component({
